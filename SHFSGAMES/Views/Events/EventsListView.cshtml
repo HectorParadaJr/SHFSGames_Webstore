@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SHFSGAMES.Models.Events>
+
+@{
+    ViewData["Title"] = "Events";
+}
+
+<h1>Future Events</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Created By
+            </th>
+            <th>
+                Event Name
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventLocation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employees.FirstName) @Html.DisplayFor(modelItem => item.Employees.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventLocation)
+                </td>
+                <td>
+                    <a asp-action="MemberDetails" asp-route-id="@item.EventId">View Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

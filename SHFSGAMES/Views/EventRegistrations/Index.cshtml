@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SHFSGAMES.Models.EventRegistrations>
+
+@{
+    ViewData["Title"] = "Events";
+}
+
+<h1>Your Registered Events</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Events.EventTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events.EventDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events.EventDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events.EventTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events.EventLocation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Events.EventTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Events.EventDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Events.EventDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Events.EventTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Events.EventLocation)
+            </td>
+            <td>
+                <div class="text-danger">@ViewBag.error</div>
+                @if (item.Events.EventDate > DateTime.Now)
+                {
+                    <a asp-action="Unregister" asp-route-id="@item.EventId">Unregister</a>
+
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

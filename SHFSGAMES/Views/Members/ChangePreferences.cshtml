@@ -1,0 +1,29 @@
+﻿@model SHFSGAMES.Models.Members
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["memberID"] = $"{Context.Session.GetInt32("memberID")}";
+    ViewData["UserFullName"] = $"{Context.Session.GetString("userFullName")}";
+}
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Preferences</h4>
+
+<form asp-action="ChangePreferences">
+    <div class="form-group">
+        <label asp-for="CategoryMembers" class="control-label">Select Favourite Categories</label>
+        <div class="text-danger">@ViewBag.Cerror</div>
+        <select multiple asp-for="CategoryMembers" class="form-control" asp-items="ViewBag.CategoryId"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="PlatformMembers" class="control-label">Select Favourite Platforms</label>
+        <div class="text-danger">@ViewBag.Perror</div>
+        <select multiple asp-for="PlatformMembers" class="form-control" asp-items="ViewBag.PlatformId"></select>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>

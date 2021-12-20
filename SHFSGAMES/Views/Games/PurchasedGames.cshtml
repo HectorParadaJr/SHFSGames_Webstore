@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SHFSGAMES.Models.OrderItems>
+
+@{
+    ViewData["Title"] = "Purchased Games";
+}
+
+<h1>Purchased Games</h1>
+<div class="text-success">@TempData["download"]</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Games.GameName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Games.GameDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Games.GameDeveloper)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Games.GameName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Games.GameDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Games.GameDeveloper)
+                </td>
+                <td>
+                    <a asp-action="DownloadPurchased" asp-route-id="@item.GameId">Download Game</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="DownloadIndex">Back</a>

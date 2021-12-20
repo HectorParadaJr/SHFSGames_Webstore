@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SHFSGAMES.Models.OrderItems>
+
+@{
+    ViewData["Title"] = "Order Items";
+}
+
+<h1>Order Items</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Games)
+            </th>
+            <th>
+                Platform
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Games.GameName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Platforms.PlatformName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Orders" asp-action="EmployeeIndex">Back to Orders</a>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SHFSGAMES.Models.Games>
+
+@{
+    ViewData["Title"] = "Games List Report";
+    var i = 1;
+}
+
+<h1>List of Games</h1>
+<h5><a href="javascript:window.print()" class="btn btn-dark no-print">Print Report</a></h5>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>
+                @Html.DisplayNameFor(model => model.GameName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @i
+                @{ 
+                    i++;
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GameName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

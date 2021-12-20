@@ -1,0 +1,34 @@
+﻿@model IEnumerable<SHFSGAMES.Models.MemberFriendsFamilyLists>
+
+@{
+    ViewData["Title"] = "Friends & Family List";
+}
+
+<h1>Members in Your Friends and Family List</h1>
+
+<a asp-action="AddMember">Add Member to List</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    <a asp-action="DeleteFromList" asp-route-id="@item.FriendsFamilyListId" asp-route-username="@item.Username" asp-route-memberId="@item.MemberId">Remove</a>
+                    @ViewBag.error
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

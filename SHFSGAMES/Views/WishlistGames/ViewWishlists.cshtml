@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SHFSGAMES.Models.WishlistGames>
+
+@{
+    ViewData["Title"] = "Wishlist Report";
+    int count = 1;
+    DateTime newDate;
+}
+
+<h1>Wishlist Report</h1>
+<h5><a href="javascript:window.print()" class="btn btn-dark no-print">Print Report</a></h5>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Game</th>
+            <th>Number of times added to Wishlist</th>
+            <th>Date Last Added to Wishlist</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.GroupBy(a => a.Games))
+        {
+            count = 0;
+            <tr>
+                @foreach (var game in item)
+                {
+                    <td>
+                        @game.Games.GameName
+                    </td>
+                    <td>
+                        @foreach (var game2 in item)
+                        {
+                            if (game.Games.GameName == game2.Games.GameName)
+                            {
+                                count++;
+                            }
+                        }
+                        @count
+                    </td>
+                    <td>
+                        @game.DateAdded.ToShortDateString()
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

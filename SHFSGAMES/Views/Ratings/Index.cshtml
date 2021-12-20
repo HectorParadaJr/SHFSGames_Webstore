@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SHFSGAMES.Models.Ratings>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Ratings</h1>
+
+<p>
+    <a asp-action="Create">Add a New Rating</a>
+    <div class="text-danger">@ViewBag.error</div>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Game
+            </th>
+            <th>
+                Rating
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Games.GameName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate)/10
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RatingId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.RatingId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<SHFSGAMES.Models.WishlistGames>
+
+@{
+    ViewData["Title"] = "Wishlist";
+}
+
+<h1>Wishlist</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Game
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Games.GameName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+        <a asp-controller="MemberFriendsFamilyLists" asp-action="ListOfFriends">Back</a>
+</div>

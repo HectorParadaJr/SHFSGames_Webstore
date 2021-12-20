@@ -1,0 +1,17 @@
+﻿@model SHFSGAMES.Models.Members
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Member Home";
+    ViewData["UserEmail"] = $"{Context.Session.GetString("email")}";
+    ViewData["UserFullName"] = $"{Context.Session.GetString("userFullName")}";
+
+}
+
+<h1>Welcome @ViewData["UserFullName"]</h1>
+<a asp-area="" asp-controller="Members" asp-action="MemberPreferencesView">View Platforms/Categories</a> <br />
+<a asp-area="" asp-controller="MailingAddresses" asp-action="Index">Mailing Address</a> <br />
+<a asp-area="" asp-controller="ShippingAddresses" asp-action="Index">Shipping Address</a> <br />
+<a asp-area="" asp-controller="Payments" asp-action="Index">Credit Card(s)</a> <br />
+<a asp-area="" asp-controller="Members" asp-action="ChangePassword">Change Password</a> <br />
+

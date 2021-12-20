@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SHFSGAMES</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    @using Microsoft.AspNetCore.Http;
+    @if (Context.Session.GetString("userType") == null || Context.Session.GetString("userType") == "")
+    {
+        @* home before login view - show log in/create/employee log in *@
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/image/SHFS_Logo_2.png" height="100" width="100"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                    </div>
+                    <div id="loginCreateAccount">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:blue" asp-area="Create" asp-controller="Members" asp-action="Create">Create Account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:red" asp-area="" asp-controller="Members" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:green" asp-area="" asp-controller="Employees" asp-action="EmployeeLogin">Employee Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+    }
+
+    @if (Context.Session.GetString("userType") == "member")
+    {
+        @* member view - show member preferences/games member view/events member view/log out*@
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/image/SHFS_Logo_2.png" height="100" width="100"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                    </div>
+                    <div id="loginCreateAccount">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:green" asp-area="" asp-controller="Games" asp-action="MemberIndex">Games</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle float-right nav-link" role="button" data-toggle="dropdown" style="color:red">Events</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Events" asp-action="EventsListView">All Events</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="EventRegistrations" asp-action="Index">Registered Events</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:green" asp-area="" asp-controller="Games" asp-action="DownloadIndex">Download Games</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:green" asp-area="" asp-controller="CartItems" asp-action="Index">Cart</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle float-right nav-link" role="button" data-toggle="dropdown" style="color:red">Account</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Members" asp-action="Details">Edit Profile</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Members" asp-action="MemberHomePage">Account</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="WishlistGames" asp-action="Index">View Wishlist</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Members" asp-action="FFPage">Friends/Family Wishlists</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Ratings" asp-action="Index">Ratings</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Reviews" asp-action="Index">Reviews</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Orders" asp-action="Index">Orders</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:blue" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    }
+
+    @if (Context.Session.GetString("userType") == "employee")
+    {
+        @* employee view - show games/events/log out*@
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/image/SHFS_Logo_2.png" height="100" width="100"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                    </div>
+                    <div id="loginCreateAccount">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:red" asp-area="" asp-controller="Games" asp-action="Index">Games</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:red" asp-area="" asp-controller="Events" asp-action="Index">Events</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:red" asp-area="" asp-controller="Reviews" asp-action="EmployeeIndex">Approve Reviews</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:red" asp-area="" asp-controller="Orders" asp-action="EmployeeIndex">Orders</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle float-right nav-link" role="button" data-toggle="dropdown" style="color:green">Reports</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Games" asp-action="ViewGamesList">Game List Report</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Games" asp-action="ViewGameDetails">Game Detail Report</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Members" asp-action="ViewMembersList">Member List Report</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Members" asp-action="ViewMemberDetails">Member Detail Report</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="WishlistGames" asp-action="ViewWishlists">Wishlist Report</a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a asp-area="" asp-controller="Orders" asp-action="SalesReport">Sales Report</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link float-right" style="color:blue" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    }
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 SHFSGAMES 
+            @*<a class="nav-link float-right no-print" style="color:green" asp-area="" asp-controller="Employees" asp-action="EmployeeLogin">Employee Login</a>*@
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

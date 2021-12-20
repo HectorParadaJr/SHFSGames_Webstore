@@ -1,0 +1,32 @@
+﻿@model IEnumerable<SHFSGAMES.Models.WishlistGames>
+
+@{
+    ViewData["Title"] = "Wishlist";
+}
+
+<h1>Wishlist</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Game
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Games.GameName)
+                    </td>
+                    <td>
+                        <a asp-action="DeleteFromWishlist" asp-route-id="@item.WishlistId" asp-route-gameId="@item.GameId">Remove From Wishlist</a>
+                        @ViewBag.error
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

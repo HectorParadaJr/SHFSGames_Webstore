@@ -1,0 +1,76 @@
+﻿@model SHFSGAMES.Models.Payments
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Edit Credit Card</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PaymentId" />
+            <div class="form-group">
+                <label hidden asp-for="MemberId" class="control-label"></label>
+                <select hidden asp-for="MemberId" class="form-control" asp-items="ViewBag.MemberId"></select>
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CardNumber" class="control-label"></label>
+                <input asp-for="CardNumber" class="form-control" />
+                <span asp-validation-for="CardNumber" class="text-danger"></span>
+                <div class="text-danger">@ViewBag.Lerror</div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpirationMonth" class="control-label"></label>
+                <select asp-for="ExpirationMonth" class="form-control">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <span asp-validation-for="ExpirationMonth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpirationYear" class="control-label"></label>
+                <select asp-for="ExpirationYear" class="form-control">
+                    <option value="2030">2030</option>
+                    <option value="2029">2029</option>
+                    <option value="2028">2028</option>
+                    <option value="2027">2027</option>
+                    <option value="2026">2026</option>
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                </select>
+                <span asp-validation-for="ExpirationYear" class="text-danger"></span>
+                <div class="text-danger">@ViewBag.error</div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back</a>
+</div>
+

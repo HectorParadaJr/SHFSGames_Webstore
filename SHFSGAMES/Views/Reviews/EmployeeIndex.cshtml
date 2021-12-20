@@ -1,0 +1,62 @@
+﻿@model IEnumerable<SHFSGAMES.Models.Reviews>
+
+@{
+    ViewData["Title"] = "Approve Reviews";
+}
+
+<h1>Approve Reviews</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Games)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Approved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Members.Username)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Games.GameName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Approved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Members.Username)
+            </td>
+            <td>
+
+                <a asp-action="Approve" asp-route-id="@item.ReviewId">Approve/Deny</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

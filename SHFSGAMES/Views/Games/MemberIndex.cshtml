@@ -1,0 +1,92 @@
+﻿@model IEnumerable<SHFSGAMES.Models.Games>
+
+@{
+    ViewData["Title"] = "Games List";
+}
+
+<h1>Games</h1>
+
+<form asp-action="SearchGame">
+    <label>Search for a Game:</label>
+    <div class="form-group">
+        <label for="gameName" class="control-label"></label>
+        <input for="gameName" name="gameName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-primary" />
+        <button class="btn btn-primary text-white"><a asp-action="MemberIndex">Cancel</a></button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GameName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GameDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GameDeveloper)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.GameCategories)*@
+                Categories
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.GamePlatforms)*@
+                Platforms
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RatingTotal)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="MemberDetails" asp-route-id="@item.GameId">@Html.DisplayFor(modelItem => item.GameName)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GameDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GameDeveloper)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @foreach (var game in item.GameCategories)
+                    {
+                        @game.Categories.CategoryName
+                        <br />
+                    }
+                </td>
+                <td>
+                    @foreach (var game in item.GamePlatforms)
+                    {
+                        @game.Platforms.PlatformName
+                        <br />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RatingTotal)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

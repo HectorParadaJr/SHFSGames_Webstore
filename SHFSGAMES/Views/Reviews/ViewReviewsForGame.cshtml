@@ -1,0 +1,52 @@
+﻿@model IEnumerable<SHFSGAMES.Models.Reviews>
+
+@{
+    ViewData["Title"] = "Index";
+    int gameId = ViewBag.gameId;
+}
+
+<h1>Reviews for @ViewBag.gameName</h1>
+<div>
+    <p class="text-danger">@ViewBag.msg</p>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Members.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Members.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewDate)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-controller="Games" asp-action="MemberDetails" asp-route-id="@gameId">Back</a>
+</div>

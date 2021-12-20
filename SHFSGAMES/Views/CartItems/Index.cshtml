@@ -1,0 +1,79 @@
+﻿@model IEnumerable<SHFSGAMES.Models.CartItems>
+
+@{
+    ViewData["Title"] = "Cart";
+    double cartTotal = 0;
+    int items = 0;
+}
+
+<h1>Your Cart</h1>
+<p>NOTE: PC version = Digital Version</p>
+<div class="text-success">
+    @ViewBag.cart
+</div>
+<div id="orderMsg" class="text-success">
+    @TempData["order"]
+</div>
+<div class="text-danger">@ViewBag.order</div>
+<div class="text-danger">@ViewBag.msg</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Games)
+            </th>
+            <th>
+                Platform
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            items++;
+            <tr>
+                <td>
+                    <a asp-controller="Games" asp-action="MemberDetails" asp-route-id="@item.GameId">
+                        @Html.DisplayFor(modelItem => item.Games.GameName)
+                    </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Platforms.PlatformName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                    @{
+                        var quantity = item.Quantity;
+                        var price = item.Price;
+
+                        cartTotal += quantity * price;
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CartItemId">Edit Quantity</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CartItemId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <p>Cart Total: @cartTotal.ToString("C")</p> <br />
+    <a asp-action="EmptyCart">Empty Cart</a>
+</div>
+<br />
+@if (items > 0)
+{
+    <a class="btn btn-primary" asp-action="PlaceOrder">Check Out</a>
+}

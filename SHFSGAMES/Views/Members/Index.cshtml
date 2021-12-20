@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SHFSGAMES.Models.Members>
+@using Microsoft.AspNetCore.Http
+
+@*adds the member name from the session variable*@
+
+@{
+    ViewData["User"] = $"{Context.Session.GetString("email")}";
+    ViewData["UserFullName"] = $"{Context.Session.GetString("userFullName")}";
+    
+ }
+
+@{
+    ViewData["Title"] = $"Index {Context.Session.GetString("email")}";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SHFSGAMES</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <h3>Welcome @ViewData["UserFullName"]</h3>
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 SHFSGAMES <a hidden class="nav-link float-right no-print" style="color:green" asp-area="" asp-controller="Employees" asp-action="EmployeeLogin">Employee Login</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*@RenderSection("Scripts", required: false)*@
+</body>
+

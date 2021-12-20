@@ -1,0 +1,54 @@
+﻿@model SHFSGAMES.Models.CartItems
+
+@{
+    ViewData["Title"] = "Add Game to Cart";
+    int gameId = ViewBag.GameId;
+    string selected = ViewBag.SelectedPlatform;
+}
+
+<h1>Add @ViewBag.GameName to Cart</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label name="PlatformName" class="control-label"></label>
+                <select id="platformName" name="PlatformName" class="form-control">
+                    @foreach (var item in ViewBag.PlatformNames)
+                    {
+                        if (item == selected)
+                        {
+                            <option selected value="@item">@item</option>
+                        }
+                        else
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="text-danger">@ViewBag.cartMsg</div>
+
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+                <div class="text-danger">@ViewBag.QuantityMsg</div>
+            </div>
+            <div>
+                <label hidden asp-for="GameId" class="control-label"></label>
+                <input hidden value="@gameId" asp-for="GameId" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add to Cart" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-controller="Games" asp-action="MemberDetails" asp-route-id="@gameId">Back</a>
+</div>
+

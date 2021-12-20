@@ -1,0 +1,81 @@
+﻿@model IEnumerable<SHFSGAMES.Models.Members>
+
+@{
+    ViewData["Title"] = "Member Detail Report";
+}
+
+<h1>Member Detail Report</h1>
+<h5><a href="javascript:window.print()" class="btn btn-dark no-print">Print Report</a></h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                Mailing Address
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.MailingAddresses.Address), @Html.DisplayFor(modelItem => item.MailingAddresses.City) @Html.DisplayFor(modelItem => item.MailingAddresses.Province), @Html.DisplayFor(modelItem => item.MailingAddresses.PostalCode), @Html.DisplayFor(modelItem => item.MailingAddresses.Country)*@
+                @foreach (var address in item.MailingAddresses)
+        {
+            <p>@address.Address, @address.City @address.Province, @address.PostalCode, @address.Country</p>
+        }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

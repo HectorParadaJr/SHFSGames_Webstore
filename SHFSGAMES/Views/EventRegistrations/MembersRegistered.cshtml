@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SHFSGAMES.Models.EventRegistrations>
+
+@{
+    ViewData["Title"] = "Registrations";
+    int eventId = ViewBag.eventId;
+}
+
+<h1>Members Registered For: @ViewBag.eventName</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Member:
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Members.FirstName) @Html.DisplayFor(modelItem => item.Members.LastName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Events" asp-action="Details" asp-route-id="@eventId">Back</a>
+</div>

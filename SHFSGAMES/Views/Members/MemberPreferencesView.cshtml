@@ -1,0 +1,36 @@
+﻿@model SHFSGAMES.Models.Members
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Member Preferences";
+    ViewData["UserFullName"] = $"{Context.Session.GetString("userFullName")}";
+
+}
+
+<h1>@ViewData["UserFullName"] Preferences</h1>
+<h4>Favourite Categories</h4>
+@if (ViewBag.cNames != null)
+{
+    @foreach (var item in ViewBag.cNames)
+    {
+        @Html.Raw(item);
+        <br />
+    }
+}
+
+
+<h4>Favourite Platforms</h4>
+@if (ViewBag.pNames != null)
+{
+    @foreach (var item in ViewBag.pNames)
+    {
+        @Html.Raw(item);
+        <br />
+    }
+}
+
+
+<div>
+    <a asp-area="" asp-controller="Members" asp-action="ChangePreferences">Change Preferences</a><br />
+    <a asp-area="" asp-controller="Members" asp-action="MemberHomePage">Back to Home</a>
+</div>

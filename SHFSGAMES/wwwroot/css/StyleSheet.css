@@ -1,0 +1,33 @@
+﻿section {
+    background-color: darkcyan;
+}
+.login-form {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    box-sizing: border-box;
+    padding: 60px 30px;
+    text-align: center;
+    
+    transition: .5s;
+}
+
+.login-form:hover {
+        background: rgba(255,255,255,.1);
+        box-shadow: 0 0 20px rgba(0,0,0,.2);
+}
+.login-button input{
+    display:block;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing:border-box;
+    margin-bottom:20px;
+    border-radius:25px;
+    outline:none;
+    font-size:14px;
+    letter-spacing:1px;
+    color:cornflowerblue;
+    text-transform:uppercase;
+    border:none;
+    background:rgb(128, 128, 128);
+}

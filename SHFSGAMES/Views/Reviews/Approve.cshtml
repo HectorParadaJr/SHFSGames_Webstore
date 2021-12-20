@@ -1,0 +1,61 @@
+﻿@model SHFSGAMES.Models.Reviews
+
+@{
+    ViewData["Title"] = "Review Details";
+}
+
+<h1>Approve this Review?</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Games)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Games.GameName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReviewTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReviewTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReviewDetails)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReviewDetails)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReviewDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReviewDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Approved)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Approved)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Members.Username)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Members.Username)
+        </dd>
+    </dl>
+</div>
+<form asp-action="Approve">
+    <input type="hidden" asp-for="ReviewId" />
+    <input type="submit" value="Approve" class="btn btn-primary" /> 
+</form> &nbsp;&nbsp;
+<form asp-action="Deny">
+    <input type="hidden" name="id" value="@Model.ReviewId" />
+    <input type="submit" value="Deny" class="btn btn-danger" />
+</form>
+<br />
+<div>
+      <a asp-action="EmployeeIndex">Back</a>
+</div>

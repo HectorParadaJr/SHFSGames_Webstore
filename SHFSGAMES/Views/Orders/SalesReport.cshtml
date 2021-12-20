@@ -1,0 +1,83 @@
+﻿@model IEnumerable<SHFSGAMES.Models.Orders>
+
+@{
+    ViewData["Title"] = "Sales Report";
+}
+@{ 
+    double total = 0;
+    int quantity = 0;
+} 
+
+<h1>Sales Report</h1>
+<h5><a href="javascript:window.print()" class="btn btn-dark no-print">Print Report</a></h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Order Date:
+            </th>
+            <th>
+                Customer Name:
+            </th>
+            <th>
+                Quantity:
+            </th>
+            <th>
+                Shipped Status:
+            </th>
+            <th>
+                Shipped Date:
+            </th>
+            <th>
+                Total:
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @{ 
+                    var orderDate = item.OrderDate;
+                }
+                @orderDate.ToShortDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Members.FirstName) @Html.DisplayFor(modelItem => item.Members.LastName)
+            </td>
+            <td>
+                @{ quantity = 0;}
+                @foreach (var order in item.OrderItems)
+                {
+                    quantity += order.Quantity;
+                }
+                @quantity
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @{ 
+                    var shipDate = item.ShippedDate;
+                }
+                @shipDate.ToShortDateString()
+            </td>
+            <td>
+                @{
+                    var totalItem = item.Total;
+                    total += item.Total;
+                }
+                @totalItem.ToString("C")
+            </td>
+        </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total Sales: @total.ToString("C")</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,15 @@
+﻿@model SHFSGAMES.Models.Members
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Member Home";
+    ViewData["UserEmail"] = $"{Context.Session.GetString("email")}";
+    ViewData["UserFullName"] = $"{Context.Session.GetString("userFullName")}";
+
+}
+
+<h1>Welcome @ViewData["UserFullName"]</h1>
+<a asp-area="" asp-controller="MemberFriendsFamilyLists" asp-action="ListOfFriends">View Friends and Family Lists</a>
+<br />
+<a asp-area="" asp-controller="MemberFriendsFamilyLists" asp-action="Index">Add Friends and Family to List</a>
+<br />
